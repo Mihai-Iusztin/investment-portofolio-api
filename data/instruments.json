@@ -1,0 +1,28 @@
+[
+  {
+    "id": "qy2741665143412836",
+    "name": "Moderna Inc.",
+    "symbol": "MRNA",
+    "openD": "2022-10-07",
+    "quantity": "17",
+    "openP": "125",
+    "marketP": "33",
+    "domain": "Biotechnology",
+    "dividendD": "2022-10-20",
+    "earningD": "https://www.tradingview.com/chart/KcD9WeJn/",
+    "corporation": "https://www.tradingview.com/chart/KcD9WeJn/"
+  },
+  {
+    "id": "z97rid1666426595922",
+    "name": "AMD",
+    "symbol": "AMD",
+    "openD": "2022-10-28",
+    "quantity": "10",
+    "openP": "50",
+    "marketP": "8",
+    "domain": "semiconductors",
+    "dividendD": "2022-10-20",
+    "earningD": "https://www.youtube.com/watch?v=tY-Rq_R_wyE",
+    "corporation": "https://www.youtube.com/watch?v=tY-Rq_R_wyE"
+  }
+]
