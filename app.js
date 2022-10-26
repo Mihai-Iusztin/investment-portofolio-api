@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/teams", instrumentsDBRouter);
+app.use("/investments", instrumentsDBRouter);
 
 function processingSimulate(req, res, next) {
   const wait = 500 + Math.floor(Math.random() * 6) * 100; // min-500ms + max-500ms

@@ -90,7 +90,8 @@ router.put("/update", function (req, res, next) {
       (instrument.marketP = marketP),
       (instrument.domain = domain),
       (instrument.dividendD = dividendD),
-      (instrument.earningD = corporation);
+      (instrument.earningD = earningD),
+      (instrument.corporation = corporation);
   }
   setInstruments(instruments);
   res.json({ success: true });

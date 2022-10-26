@@ -14,7 +14,7 @@ const pool = mysql.createPool({
   host: "localhost",
   user: "root",
   password: "",
-  database: "teams"
+  database: "investments"
 });
 
 function getConnection(res) {
@@ -61,7 +61,7 @@ router.get("/install", async function (req, res, next) {
 router.get("/", async function (req, res, next) {
   try {
     const connection = await getConnection(res);
-    const sql = `SELECT id, promotion, members, name, url FROM teams`;
+    const sql = `SELECT id, name, symbol, openD,quantity,openP, marketP, domain, dividendD, earningD, corporation FROM investments`;
     connection.query(sql, function (err, results) {
       if (err) {
         console.error(err);
@@ -79,23 +79,33 @@ router.get("/", async function (req, res, next) {
  *
  */
 router.post("/create", async function (req, res, next) {
-  const promotion = req.body.promotion;
-  const members = req.body.members;
   const name = req.body.name;
-  const url = req.body.url;
+  const symbol = req.body.symbol;
+  const openD = req.body.openD;
+  const quantity = req.body.quantity;
+  const openP = req.body.openP;
+  const marketP = req.body.marketP;
+  const domain = req.body.domain;
+  const dividendD = req.body.dividendD;
+  const earningD = req.body.earningD;
+  const corporation = req.body.corporation;
 
   try {
     const connection = await getConnection(res);
-    const sql = `INSERT INTO teams (id, promotion, members, name, url) VALUES (NULL, ?, ?, ?, ?);`;
-    connection.query(sql, [promotion, members, name, url], function (err, results) {
-      if (err) throw err;
-      const id = results.insertId;
-      connection.release();
-      res.json({
-        success: true,
-        id
-      });
-    });
+    const sql = `INSERT INTO investments (id, name, symbol, openD,quantity,openP, marketP, domain, dividendD, earningD, corporation) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`;
+    connection.query(
+      sql,
+      [name, symbol, openD, quantity, openP, marketP, domain, dividendD, earningD, corporation],
+      function (err, results) {
+        if (err) throw err;
+        const id = results.insertId;
+        connection.release();
+        res.json({
+          success: true,
+          id
+        });
+      }
+    );
   } catch (err) {}
 });
 
@@ -107,7 +117,7 @@ router.delete("/delete", async function (req, res, next) {
 
   try {
     const connection = await getConnection(res);
-    const sql = `DELETE FROM teams WHERE id=?`;
+    const sql = `DELETE FROM investments WHERE id=?`;
     connection.query(sql, [id], function (err, results) {
       if (err) throw err;
       connection.release();
@@ -121,19 +131,29 @@ router.delete("/delete", async function (req, res, next) {
  */
 router.put("/update", async function (req, res, next) {
   const id = req.body.id;
-  const members = req.body.members;
   const name = req.body.name;
-  const url = req.body.url;
-  const promotion = req.body.promotion;
+  const symbol = req.body.symbol;
+  const openD = req.body.openD;
+  const quantity = req.body.quantity;
+  const openP = req.body.openP;
+  const marketP = req.body.marketP;
+  const domain = req.body.domain;
+  const dividendD = req.body.dividendD;
+  const earningD = req.body.earningD;
+  const corporation = req.body.corporation;
 
   try {
     const connection = await getConnection(res);
-    const sql = `UPDATE teams SET promotion=?, members=?, name=?, url=? WHERE id=?`;
-    connection.query(sql, [promotion, members, name, url, id], function (err, results) {
-      if (err) throw err;
-      connection.release();
-      res.json({ success: true });
-    });
+    const sql = `UPDATE investments SET name=?, symbol=?, openD=?, quantity=?, openP=?, marketP=?, domain=?, dividendD=?, earningD=?, corporation=? WHERE id=?`;
+    connection.query(
+      sql,
+      [name, symbol, openD, quantity, openP, marketP, domain, dividendD, earningD, corporation, id],
+      function (err, results) {
+        if (err) throw err;
+        connection.release();
+        res.json({ success: true });
+      }
+    );
   } catch (err) {}
 });
 
