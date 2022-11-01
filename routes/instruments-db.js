@@ -61,7 +61,7 @@ router.get("/install", async function (req, res, next) {
 router.get("/", async function (req, res, next) {
   try {
     const connection = await getConnection(res);
-    const sql = `SELECT id, name, symbol, openD,quantity,openP, marketP, domain, dividendD, earningD, corporation FROM investments`;
+    const sql = `SELECT id, name, symbol, DATE_FORMAT(openD, "%Y-%m-%d") as openD,quantity,openP, marketP, domain, DATE_FORMAT(dividendD, "%Y-%m-%d") as dividendD, DATE_FORMAT(earningD, "%Y-%m-%d") as earningD, corporation FROM investments`;
     connection.query(sql, function (err, results) {
       if (err) {
         console.error(err);
